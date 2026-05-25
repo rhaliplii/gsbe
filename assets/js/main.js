@@ -7,7 +7,7 @@ function updateNavAria(id){
     }
   });
 }
-const PAGE_URLS = {home:'index.html',about:'about.html',projects:'projects.html',investors:'investors.html',partners:'partners.html',news:'news.html',contact:'contact.html'};
+const PAGE_URLS = {home:'index.html',about:'about.html',projects:'projects.html',investors:'investors.html',partners:'partners.html',news:'news.html',contact:'contact.html',privileged:'privileged-information.html'};
 function currentPageId(){ return document.body.getAttribute('data-page') || 'home'; }
 function showPage(id){
   const target = PAGE_URLS[id] || 'index.html';
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   setLang('ro');
   initReveal();
   if(page==='contact')setTimeout(syncContactPhoto,420);
-  if(location.hash==='#cef-radeni-detail')setTimeout(()=>showProjectDetail('cef-radeni-detail'),120);
+  if(location.hash==='#cef-radeni-detail')window.location.href='cef-radeni.html';
   if(page==='news' && location.hash.endsWith('-article'))setTimeout(()=>showNewsArticle(location.hash.slice(1)),120);
 });
 function syncContactPhoto(){
@@ -80,11 +80,7 @@ function showNewsArticle(id){
   window.scrollTo(0,0);
 }
 function showProjectDetail(id){
-  const detail = document.getElementById(id);
-  if(!detail){ window.location.href = 'projects.html#' + id; return; }
-  detail.style.display='block';
-  document.body.style.overflow='hidden';
-  window.scrollTo(0,0);
+  window.location.href = 'cef-radeni.html';
 }
 
 // ── Gallery data ──────────────────────────────────────────────────────────────
@@ -122,7 +118,6 @@ var _gAll = [
   {"src":"assets/images/gallery/full/cef-radeni-inauguration-24.jpg","thumb":"assets/images/gallery/thumbs/cef-radeni-inauguration-24.jpg","cat":"cef","ro":"Inaugurarea CEF Rădeni — fotografie 24","en":"CEF Rădeni inauguration — photo 24"},
   {"src":"assets/images/gallery/full/cef-radeni-inauguration-25.jpg","thumb":"assets/images/gallery/thumbs/cef-radeni-inauguration-25.jpg","cat":"cef","ro":"Inaugurarea CEF Rădeni — fotografie 25","en":"CEF Rădeni inauguration — photo 25"},
   {"src":"assets/images/gallery/full/cef-radeni-inauguration-26.jpg","thumb":"assets/images/gallery/thumbs/cef-radeni-inauguration-26.jpg","cat":"cef","ro":"Inaugurarea CEF Rădeni — fotografie 26","en":"CEF Rădeni inauguration — photo 26"},
-  {"src":"assets/images/gallery/full/cef-radeni-inauguration-27.jpg","thumb":"assets/images/gallery/thumbs/cef-radeni-inauguration-27.jpg","cat":"cef","ro":"Inaugurarea CEF Rădeni — fotografie 27","en":"CEF Rădeni inauguration — photo 27"},
   {"src":"assets/images/gallery/full/bess-radeni-inauguration-01.jpg","thumb":"assets/images/gallery/thumbs/bess-radeni-inauguration-01.jpg","cat":"bess","ro":"Inaugurarea BESS Rădeni — fotografie 1","en":"BESS Rădeni inauguration — photo 1"},
   {"src":"assets/images/gallery/full/bess-radeni-inauguration-02.jpg","thumb":"assets/images/gallery/thumbs/bess-radeni-inauguration-02.jpg","cat":"bess","ro":"Inaugurarea BESS Rădeni — fotografie 2","en":"BESS Rădeni inauguration — photo 2"},
   {"src":"assets/images/gallery/full/bess-radeni-inauguration-03.jpg","thumb":"assets/images/gallery/thumbs/bess-radeni-inauguration-03.jpg","cat":"bess","ro":"Inaugurarea BESS Rădeni — fotografie 3","en":"BESS Rădeni inauguration — photo 3"},
