@@ -114,11 +114,19 @@
 }
 </script>
 
+<script>
+(function(){
+  try {
+    document.documentElement.lang = localStorage.getItem("gsbe-lang") === "en" ? "en" : "ro";
+  } catch(e) {}
+})();
+</script>
+
 <!-- Fonts — with display=swap to prevent FOIT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=5">
+<link rel="stylesheet" href="assets/css/styles.css?v=6">
 </head>
 <body data-page="contact">
 
@@ -236,5 +244,5 @@
     <div class="footer-bottom"><span>© 2026 GS Blue Electric SRL &nbsp;·&nbsp; IDNO 1024600034565 &nbsp;·&nbsp; Chișinău, Republica Moldova. <span data-en="All rights reserved." data-ro="Toate drepturile rezervate.">Toate drepturile rezervate.</span></span><span style="color:rgba(255,255,255,.3);font-style:italic;font-size:.8rem" data-en="Built in Moldova. Powered for Europe." data-ro="Construit în Moldova. Alimentat pentru Europa.">Construit în Moldova. Alimentat pentru Europa.</span></div>
   </div>
 </footer>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2"></script>
 </body></html>

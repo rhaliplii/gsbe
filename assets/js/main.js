@@ -1,4 +1,14 @@
-let lang='ro';
+const LANG_STORAGE_KEY = 'gsbe-lang';
+function normalizeLang(l){ return l === 'en' ? 'en' : 'ro'; }
+function getStoredLang(){
+  try { return normalizeLang(localStorage.getItem(LANG_STORAGE_KEY)); }
+  catch(e){ return 'ro'; }
+}
+function storeLang(l){
+  try { localStorage.setItem(LANG_STORAGE_KEY, normalizeLang(l)); }
+  catch(e){}
+}
+let lang=getStoredLang();
 function updateNavAria(id){
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a=>{
     a.removeAttribute('aria-current');
@@ -26,12 +36,21 @@ function updateHtmlLang(l){
   if(canonical){ canonical.href = window.location.href.split('#')[0]; }
 }
 function setLang(l){
-  lang=l;
-  document.getElementById('btn-en').classList.toggle('active',l==='en');
-  document.getElementById('btn-ro').classList.toggle('active',l==='ro');
-  document.documentElement.lang=l;
+  lang=normalizeLang(l);
+  storeLang(lang);
+  const btnEn=document.getElementById('btn-en');
+  const btnRo=document.getElementById('btn-ro');
+  if(btnEn){
+    btnEn.classList.toggle('active',lang==='en');
+    btnEn.setAttribute('aria-current', lang==='en' ? 'true' : 'false');
+  }
+  if(btnRo){
+    btnRo.classList.toggle('active',lang==='ro');
+    btnRo.setAttribute('aria-current', lang==='ro' ? 'true' : 'false');
+  }
+  updateHtmlLang(lang);
   document.querySelectorAll('[data-en]').forEach(el=>{
-    const t=el.getAttribute('data-'+l); if(!t) return;
+    const t=el.getAttribute('data-'+lang); if(!t) return;
     if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder=t;
     else if(el.tagName==='OPTION') el.textContent=t;
     else el.innerHTML=t;
@@ -51,7 +70,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const page=currentPageId();
   showPage(page);
   if(page==='news') renderGallery();
-  setLang('ro');
+  setLang(lang);
   initReveal();
   if(page==='contact')setTimeout(syncContactPhoto,420);
   if(location.hash==='#cef-radeni-detail')window.location.href='cef-radeni.html';
